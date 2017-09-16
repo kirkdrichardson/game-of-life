@@ -1,24 +1,44 @@
-                                                                    .App {
+$primaryColor: #222;
+$secondaryColor: red;
+$tertiaryColor: green;
+$textColor: gray;
+
+
+html, body {
+  background-color: $primaryColor;
+  color: $textColor;
+}
+
+.App {
   text-align: center;
+  border: dashed 2px coral;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.modal{ display:block; }
+
+
+
+
+.addButton {
+  float: right;
+  margin-right: 4em;
 }
 
-.App-intro {
-  font-size: large;
+.recipe {
+  text-align: left;
+  margin-left: 1.5em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.recipe, h3 {
+  font-size: 1.5em;
+}
+
+.recipeBody {
 }
