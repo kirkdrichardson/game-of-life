@@ -12,6 +12,8 @@ html, body {
 .App {
   text-align: center;
   border: dashed 2px coral;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .modal-container {
@@ -36,9 +38,12 @@ html, body {
   margin-left: 1.5em;
 }
 
-.recipe, h3 {
-  font-size: 1.5em;
+.recipeTitle {
+  font-size: 2.5em;
+  cursor: pointer;
 }
 
 .recipeBody {
+  font-size: 1.5em;
+  display: none;
 }
