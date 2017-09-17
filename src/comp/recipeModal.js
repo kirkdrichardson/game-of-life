@@ -12,22 +12,30 @@ class RecipeModal extends Component {
         <Modal.Header closeButton>
           <Modal.Title style={{color: "black"}}>
             <ControlLabel>Title</ControlLabel>
-            <FormGroup controlId="formControlsTitle">
-              <FormControl type="text" placeholder="Peach Cobbler" />
+            <FormGroup>
+              <FormControl
+                type="text"
+                id="title"
+                placeholder="Peach Cobbler"
+                onChange={ this.props.changeState } />
             </FormGroup>
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-        <FormGroup controlId="formControlsIngredients">
+        <FormGroup>
           <ControlLabel>Ingredients</ControlLabel>
-          <FormControl componentClass="textarea" placeholder="peaches, cobblers, sugar" />
+          <FormControl
+            componentClass="textarea"
+            id="ingredients"
+            placeholder="peaches, cobblers, sugar"
+            onChange={ this.props.changeState } />
           <HelpBlock>* Separate ingredients with a comma</HelpBlock>
         </FormGroup>
        </Modal.Body>
 
         <Modal.Footer>
-          <Button bsStyle="success" onClick={this.props.addRecipe}>
+          <Button bsStyle="success" type="submit" onClick={this.props.addRecipe}>
             <i className="glyphicon glyphicon-check"></i> Save
           </Button>
         </Modal.Footer>

@@ -1,20 +1,13 @@
-$primaryColor: #222;
-$secondaryColor: red;
-$tertiaryColor: green;
-$textColor: gray;
+$primaryColor: #F4DECB;
+$secondaryColor: #945D60;
+$tertiaryColor: #FEDCD2;
+$textColor: white;
+$textColorDark: #570000;
 
 
-html, body {
-  background-color: $primaryColor;
-  color: $textColor;
-}
 
-.App {
-  text-align: center;
-  border: dashed 2px coral;
-  width: 70%;
-  margin: 0 auto;
-}
+$titleFont: 'Raleway', sans-serif;
+$bodyFont: 'Roboto Slab', serif;
 
 .modal-container {
   position: relative;
@@ -26,24 +19,64 @@ html, body {
 .modal{ display:block; }
 
 
+html, body {
+  background-color: $primaryColor;
+}
 
+.App {
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  color: $textColor;
+  font-family: $bodyFont;
+}
+
+
+
+h1{
+  font-weight: bold;
+  font-size: 4em;
+  margin-bottom: 60px;
+  color: $textColorDark;
+}
 
 .addButton {
-  float: right;
+  display: block;
   margin-right: 4em;
+  background-color: #626E60;
 }
+
 
 .recipe {
   text-align: left;
   margin-left: 1.5em;
-}
 
-.recipeTitle {
-  font-size: 2.5em;
-  cursor: pointer;
-}
 
-.recipeBody {
-  font-size: 1.5em;
-  display: none;
+  .recipeTitle {
+    font-size: 2.3em;
+    font-weight: bold;
+    font-family: $titleFont;
+    cursor: pointer;
+    background-color: $secondaryColor;
+    border-radius: 10px;
+    padding: 3%;
+    box-shadow: 5px 5px 5px $secondaryColor;
+  }
+
+  .recipeBody {
+    display: none;
+    font-size: 2em;
+    width: 95%;
+    margin: 0 auto;
+    padding: 2%;
+    background-color: $tertiaryColor;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px $secondaryColor;
+    color: $textColorDark;
+
+    .btnGroup {
+      margin-top: 30px;
+      box-shadow: 5px 5px 5px $secondaryColor;
+    }
+  }
 }
