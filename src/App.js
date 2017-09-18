@@ -12,7 +12,8 @@ class App extends Component {
       showModal: false,
       recipes: [],
       title: '',
-      ingredients: []
+      ingredients: [],
+      action: ''
     }
   }
 
@@ -45,10 +46,16 @@ class App extends Component {
 
   // modal switches
   openModal = () => {
-    this.setState({ showModal: true });
+    this.setState({ action: 'Add Recipe', showModal: true });
   }
+
   closeModal = () => {
-    this.setState({ showModal: false })
+    this.setState({
+      showModal: false,
+      title: '',
+      ingredients: [],
+      action: ''
+    });
   }
 
   // handle user input to the modal in state
@@ -75,6 +82,7 @@ class App extends Component {
       title: '',
       ingredients: [],
       showModal: false,
+      action: '',
       recipes: storedRecipes
     });
   }
@@ -90,19 +98,26 @@ deleteRecipe = (e) => {
 }
 
 
-// editRecipe = (e) => {
-//   const idToEdit = parseInt(e.target.parentElement.parentElement.id, 10)
-//   let storedRecipes = JSON.parse(localStorage.getItem('recipes'));
-//   let recipe = storedRecipes.filter((obj) => obj.id === idToEdit)[0];
-//
-//
-//   console.log(idToEdit, storedRecipes, recipe, recipe.title, recipe.ingredients);
-//   this.setState({ showModal: true })
-//
-//   //
-//   // localStorage.setItem('recipes', JSON.stringify(newRecipes));
-//   // this.setState({recipes: newRecipes});
-// }
+editRecipe = (e) => {
+  const idToEdit = parseInt(e.target.parentElement.parentElement.id, 10)
+  let storedRecipes = JSON.parse(localStorage.getItem('recipes'));
+  let recipe = storedRecipes.filter((obj) => obj.id === idToEdit)[0];
+
+  this.setState({
+    action: 'Edit Recipe',
+    showModal: true,
+    title: recipe.title,
+    ingredients: recipe.ingredients
+  }, () => {
+    $('input:first').val(this.state.title);
+    $('#ingredients').val(this.state.ingredients);
+  });
+
+
+  //
+  // localStorage.setItem('recipes', JSON.stringify(newRecipes));
+  // this.setState({recipes: newRecipes});
+}
 
 
 
@@ -134,7 +149,8 @@ deleteRecipe = (e) => {
           showModal={this.state.showModal}
           closeModal={this.closeModal}
           changeState={this.changeState}
-          addRecipe={this.addRecipe}/>
+          addRecipe={this.addRecipe}
+          action={this.state.action}/>
 
       </div>
     );
@@ -143,17 +159,6 @@ deleteRecipe = (e) => {
 
 
 
-
-// make this a row that contains the recipe & add conditional rendering for
-// the read-only recipe text (pull it from the recipes arr at the top)
-// on edit, a modal should pop up that allows editing of the recipe text
-// find a way to reuse the modal component so that the recipe data can be loaded
-// into it. Might have to capture the button values to determine how to assign
-// variables for the placeholder text
-
-// also, figure out how to add text to the recipe box. It probably doesn't need to be in
-// state, but the save button will have to submit the form data so that it can be
-// appended as an object to the end of an array
 
 const RecipeBox = (props) => {
   return (
