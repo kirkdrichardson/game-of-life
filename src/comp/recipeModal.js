@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, FormGroup, ControlLabel, FormControl, FieldGroup, HelpBlock} from 'react-bootstrap';
+import { Button, Modal, FormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
 
 
 class RecipeModal extends Component {
@@ -7,7 +7,8 @@ class RecipeModal extends Component {
     super(props);
   }
   render() {
-    const buttonText = this.props.action === 'Add Recipe' ? "Save" : "Save Edits"
+    const buttonText = this.props.action === 'Add Recipe' ? "Save" : "Save Edits";
+    const buttonLogic = this.props.action === 'Add Recipe' ? this.props.addRecipe : this.props.saveEdits;
 
     return (
       <Modal show={this.props.showModal} onHide={this.props.closeModal}>
@@ -40,7 +41,7 @@ class RecipeModal extends Component {
        </Modal.Body>
 
         <Modal.Footer>
-          <Button bsStyle="success" type="submit" onClick={this.props.addRecipe}>
+          <Button bsStyle="success" type="submit" onClick={buttonLogic}>
             <i className="glyphicon glyphicon-check"></i>
             { buttonText }
           </Button>

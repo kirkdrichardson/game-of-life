@@ -13,40 +13,46 @@ class App extends Component {
       recipes: [],
       title: '',
       ingredients: [],
-      action: ''
+      action: '',
+      currentID: null
     }
   }
 
   componentDidMount() {
     // check storage & assign to recipes variable the contents if not null, else use default
-    const storage = JSON.parse(localStorage.getItem('recipes'));
-    let storedRecipes;
-    // set default value if recipes aren't already stored
-    const recipes = storage.length !== 0 ? storage : [
-      { id: 1234,
-        title:
-          "Chocolate Chip Cookies",
-        ingredients: [
-          "1/2 cup (1 stick) unsalted butter",
-          "3/4 cup packed dark brown sugar",
-          "3/4 cup sugar",
-          "2 large eggs",
-          "1 teaspoon pure vanilla extract",
-          "1 (12-ounce) bag semisweet chocolate chips, or chunks",
-          "2 1/4 cups all-purpose flour",
-          "3/4 teaspoon baking soda",
-          "1 teaspoon fine salt"] }
-    ];
+      const storage = localStorage.getItem('recipes');
+      let storedRecipes;
+      // set default value if recipes aren't already stored
+      const recipes = storage !== "undefined" || storage.length === 0 ? JSON.parse(storage) : [
+        { id: 1234,
+          title:
+            "Chocolate Chip Cookies",
+          ingredients: [
+            "1/2 cup (1 stick) unsalted butter",
+            "3/4 cup packed dark brown sugar",
+            "3/4 cup sugar",
+            "2 large eggs",
+            "1 teaspoon pure vanilla extract",
+            "1 (12-ounce) bag semisweet chocolate chips, or chunks",
+            "2 1/4 cups all-purpose flour",
+            "3/4 teaspoon baking soda",
+            "1 teaspoon fine salt"] }
+      ];
 
-    localStorage.setItem('recipes', JSON.stringify(recipes))
-    storedRecipes = JSON.parse(localStorage.getItem('recipes'));
-    this.setState({ recipes: storedRecipes });
+      console.log(recipes);
+      localStorage.setItem('recipes', JSON.stringify(recipes))
+      storedRecipes = JSON.parse(localStorage.getItem('recipes'));
+      this.setState({ recipes: storedRecipes });
+
   }
 
 
   // modal switches
   openModal = () => {
-    this.setState({ action: 'Add Recipe', showModal: true });
+    this.setState({
+      action: 'Add Recipe',
+      showModal: true
+    });
   }
 
   closeModal = () => {
@@ -54,7 +60,8 @@ class App extends Component {
       showModal: false,
       title: '',
       ingredients: [],
-      action: ''
+      action: '',
+      currentID: null
     });
   }
 
@@ -74,7 +81,8 @@ class App extends Component {
   addRecipe = () => {
     const newId = Math.floor(Math.random() * 9999);
     let storedRecipes = JSON.parse(localStorage.getItem('recipes'));
-    let newRecipe = {id: newId, title: this.state.title, ingredients: this.state.ingredients};
+    const title = this.state.title ? this.state.title : "Untitled"
+    let newRecipe = {id: newId, title: title, ingredients: this.state.ingredients};
     storedRecipes.push(newRecipe);
     localStorage.setItem('recipes', JSON.stringify(storedRecipes));
 
@@ -107,16 +115,39 @@ editRecipe = (e) => {
     action: 'Edit Recipe',
     showModal: true,
     title: recipe.title,
-    ingredients: recipe.ingredients
+    ingredients: recipe.ingredients,
+    currentID: idToEdit
   }, () => {
-    $('input:first').val(this.state.title);
+    $('#title').val(this.state.title);
     $('#ingredients').val(this.state.ingredients);
   });
+}
 
+saveEdits = (e) => {
 
-  //
-  // localStorage.setItem('recipes', JSON.stringify(newRecipes));
-  // this.setState({recipes: newRecipes});
+  let storedRecipes = JSON.parse(localStorage.getItem('recipes'));
+
+  const newRecipe = {id: this.state.currentID, title: this.state.title, ingredients: this.state.ingredients};
+  let newRecipeArr = []
+  storedRecipes.forEach((obj) => {
+    if (obj.id === this.state.currentID) {
+      newRecipeArr.push(newRecipe)
+    }
+    else {
+      newRecipeArr.push(obj);
+    }
+  });
+
+  localStorage.setItem('recipes', JSON.stringify(newRecipeArr));
+
+  this.setState({
+    title: '',
+    ingredients: [],
+    showModal: false,
+    action: '',
+    currentID: null,
+    recipes: newRecipeArr
+  });
 }
 
 
@@ -138,7 +169,7 @@ editRecipe = (e) => {
 
     return (
       <div className="App">
-        <h1>RECIPE REPO</h1>
+        <h1>My Recipes</h1>
         <AddButton className="addButton"
           openModal={this.openModal}
           />
@@ -150,7 +181,9 @@ editRecipe = (e) => {
           closeModal={this.closeModal}
           changeState={this.changeState}
           addRecipe={this.addRecipe}
-          action={this.state.action}/>
+          saveEdits={this.saveEdits}
+          action={this.state.action}
+          />
 
       </div>
     );
