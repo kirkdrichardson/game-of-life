@@ -17,11 +17,8 @@ import React from 'react';
   // }
 
   return (
-    <input
-      className="Square"
-      style={style}
-      type={"button"}
-      />
+    <div className="Square">
+      </div>
   );
 }
 
