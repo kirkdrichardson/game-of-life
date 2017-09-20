@@ -1,10 +1,6 @@
 $primaryColor: #222;
-$secondaryColor: #b56969;
-$red: #721817;
-$darkBlue: #011936;
-$tertiaryColor: #e6cf8b;
-$textColor: white;
-$textColorDark: #22264b;
+$tableBorder: #500;
+$cellBorder: #292929;
 
 $titleFont: 'Raleway', sans-serif;
 $bodyFont: 'Roboto Slab', serif;
@@ -14,34 +10,45 @@ html, body {
   background-color: $primaryColor;
 }
 
-.App {
+.container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $textColor;
-  font-family: $bodyFont;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+
+.App {
   background-color: $primaryColor;
 
+
   .Board {
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    height: 500px;
-    width: 500px;
-    border: solid 1px coral;
-    border-collapse: collapse;
+    position: absolute;
+    border: solid 10px $tableBorder;
+    border-radius: 10px;
+    white-space: nowrap;
   }
 
-  .Square {
-    width: 20px;
-    height: 20px;
-    border: solid 1px coral;
-    border-collapse: collapse;
 
-    input {
-      width: 100%;
-      height: 100%;
-    }
+  .cellRow {
+    margin: 0px;
+    height: 10px;
+    padding: 0px;
+    position: relative;
+    display: block;
+  }
+
+  .Cell {
+    width: 10px;
+    height: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    border: solid .1px $cellBorder;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .Cell-alive {
+    background-color: red;
   }
 
 }

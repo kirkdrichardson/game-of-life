@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css'
-import Square from './comp/Square.js'
+import Cell from './comp/Cell.js';
+import Row from './comp/Row.js'
 import { Button, ButtonGroup } from 'react-bootstrap';
 import $ from 'jquery'
 
@@ -12,6 +13,15 @@ class App extends Component {
       boardArr: [],  // 2D array of Square components aligned in columns & rows
       arrSize: 25
     }
+  }
+
+  componentDidMount() {
+    let rowArr = [];
+    for (let i = 0; i < 50; i++) {
+      rowArr.push(<Row className="Row" key={i} />)
+    }
+
+    this.setState({ boardArr: rowArr });
   }
 
 
@@ -26,12 +36,17 @@ class App extends Component {
       let row = [];
       for (let x = 0; x < this.state.arrSize; x++) {
         let keyId = 'row-' + x.toString() + 'column-' + y.toString();
-        row.push(<Square key={keyId}/>)
+        row.push(<Cell key={keyId}/>)
       }
       board.push(row);
     }
     return board;
   }
+
+
+
+
+
 
   render() {
 
@@ -40,8 +55,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="Board">
-        {initialBoard}
+        <div className="container">
+          <table className="Board">
+            <tbody>
+            { this.state.boardArr }
+            </tbody>
+            </table>
         </div>
       </div>
     );
