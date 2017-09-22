@@ -7,7 +7,7 @@ import React from 'react';
   }
 
   return (
-    <div className="Cell">
+    <div className="Cell" onClick={props.toggleCell}>
       </div>
   );
 }

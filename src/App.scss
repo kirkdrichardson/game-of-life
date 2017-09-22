@@ -1,6 +1,7 @@
 $primaryColor: #222;
 $tableBorder: #500;
 $cellBorder: #292929;
+$headerColor: white;
 
 $titleFont: 'Raleway', sans-serif;
 $bodyFont: 'Roboto Slab', serif;
@@ -8,21 +9,34 @@ $bodyFont: 'Roboto Slab', serif;
 
 html, body {
   background-color: $primaryColor;
+  height: 100%;
+  width: 100%;
 }
 
-.container {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 50px;
-}
+
 
 
 .App {
   background-color: $primaryColor;
+  border: solid 10px red;
+  position: relative;
+  text-align: center;
+
+  h3 {
+    color: $headerColor;
+    font-family: $titleFont;
+  }
+
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+  }
 
 
   .Board {
-    position: absolute;
+    position: relative;
     border: solid 10px $tableBorder;
     border-radius: 10px;
     white-space: nowrap;
@@ -47,8 +61,17 @@ html, body {
     cursor: pointer;
   }
 
-  .Cell-alive {
+  .alive {
     background-color: red;
+  }
+
+  .dead {
+    background-color: transparent;
+  }
+
+  .btn {
+    margin: 10px;
+    font-size: 1.2em;
   }
 
 }
