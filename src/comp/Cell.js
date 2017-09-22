@@ -2,12 +2,7 @@ import React from 'react';
 
  const Cell = (props) => {
 
-   const isAlive =
-      (Math.floor(Math.random() * 2)) ?
-        "alive" :
-        "dead";
-
-  //  const statusClass = props.alive ? "alive" : "dead";
+   const isAlive = props.status ? "alive" : "dead";
 
   return (
     <td

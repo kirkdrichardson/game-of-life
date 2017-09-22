@@ -13,6 +13,7 @@ class App extends Component {
     super(props);
     this.state = {
       boardArr: [],  // 2D array of components aligned in columns & rows
+      componentsArr: [],
       height: 50,
       width: 70,
       running: false,
@@ -25,7 +26,7 @@ class App extends Component {
 
   componentDidMount() {
     if (!this.state.running) {
-     const board = this.createInitialBoard();
+     const board = this.createRandomBoard();
      this.setState({ boardArr: board })
     }
   }
@@ -45,13 +46,23 @@ class App extends Component {
 
 
   reset = () => {
-    const board = this.createInitialBoard();
-    console.log(board);
+    const board = this.createRandomBoard();
     this.setState({ generation: 0, boardArr: board })
   }
 
-  creatRandomBoard = () => {
 
+
+  // generates a random board state to be mapped through
+  createRandomBoard = () => {
+    let board = [];
+    for (let row = 0; row < this.state.height; row++) {
+      let rowArr = [];
+      for (let column = 0; column < this.state.width; column++) {
+        rowArr.push(Math.floor(Math.random() * 2));
+      }
+      board.push(rowArr);
+    }
+    return board;
   }
 
 
@@ -77,20 +88,33 @@ class App extends Component {
   }
 
 
-
+// map over boardArr of binary values & generate components arr
   generate = () => {
     const prevGen = this.state.boardArr;
-    let newGen = prevGen;
 
-    console.log(newGen);
+    const newGen =
+      prevGen.map((row, i) => {
+        let cellRow = [];
 
-    newGen.map((row, i) => {
-      // row.map((cell, i) => {
-      //   if (cell.classList.contains("alive")) {
-      //     console.log( "cell ", i, " is ALIVE")
-      //   }
-      // });
-    });
+        row.forEach((cell, i) => {
+          // pass binary value of cell as props & push to a row
+          cellRow.push(<Cell
+            key={"cell-" + i}
+            status={cell}
+            toggleCell={this.toggleCell} />
+          );
+        });
+        return (
+          <Row
+            key={"row-" + i}
+            className="Row"
+            cellsArr={cellRow}
+            toggleCell={this.toggleCell}
+            />
+        );
+      });
+
+      return newGen;
   }
 
 
@@ -127,7 +151,9 @@ class App extends Component {
         <div className="container">
           <table className="Board">
             <tbody>
-            { this.state.boardArr }
+
+            { this.generate() }
+
             </tbody>
             </table>
         </div>
@@ -135,7 +161,7 @@ class App extends Component {
         <button
         onClick={this.generate}
         className="btn">
-        Run Generation</button>
+        Start</button>
 
         <button
         onClick={this.reset}
