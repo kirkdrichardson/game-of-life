@@ -2,15 +2,45 @@ import React from 'react';
 
  const Cell = (props) => {
 
-  let style = {
-    backgroundColor: "transparent",
-  }
+   const isAlive =
+      (Math.floor(Math.random() * 2)) ?
+        "alive" :
+        "dead";
+
+  //  const statusClass = props.alive ? "alive" : "dead";
 
   return (
-    <div className="Cell" onClick={props.toggleCell}>
-      </div>
+    <td
+      className={"Cell " + isAlive}
+      onClick={props.toggleCell} >
+      </td>
   );
 }
 
 
 export default Cell;
+
+
+
+// createCellRow = () => {
+//   let rowArr = [];
+//   for (let i = 0; i < 70; i++) {
+//     rowArr.push(
+//       <td className="Cell dead"
+//       key={"cell-" + i}
+//       onClick={this.toggleCell}></td>)
+//   }
+//   return rowArr;
+// }
+//
+//
+// createBoard = () => {
+//   let rowArr = this.createCellRow;
+//   let board = []; // will be a 2D array
+//   for (let i = 0; i < 50; i++) {
+//     board.push(<Row
+//       className="Row"
+//       key={"row-" + i} />)
+//   }
+//   return board;
+// }
