@@ -3,6 +3,8 @@ $tableBorder: #500;
 $cellBorder: #292929;
 $headerColor: white;
 
+/* #292929 cell border */
+
 $titleFont: 'Raleway', sans-serif;
 $bodyFont: 'Roboto Slab', serif;
 
@@ -18,7 +20,11 @@ html, body {
 
 .App {
   background-color: $primaryColor;
-  border: solid 10px red;
+  border: solid 1px green;
+  top: 30px;
+  padding: 30px;
+  width: 95%;
+  margin: 0 auto;
   position: relative;
   text-align: center;
 

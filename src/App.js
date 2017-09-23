@@ -5,27 +5,29 @@ import Row from './comp/Row.js'
 import { Button, ButtonGroup } from 'react-bootstrap';
 import $ from 'jquery'
 
+
+
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      createLife: true,
-      boardArr: [],  // 2D array of Square components aligned in columns & rows
+      boardArr: [],  // 2D array of components aligned in columns & rows
+      height: 50,
+      width: 70,
       running: false,
       generation: 0
     }
   }
 
-  componentDidMount() {
-    let rowArr = [];
-    for (let i = 0; i < 50; i++) {
-      rowArr.push(<Row
-        className="Row"
-        key={i}
-        toggleCell={this.toggleCell}/>)
-    }
 
-    this.setState({ boardArr: rowArr });
+
+
+  componentDidMount() {
+    if (!this.state.running) {
+     const board = this.createInitialBoard();
+     this.setState({ boardArr: board })
+    }
   }
 
 
@@ -33,17 +35,49 @@ class App extends Component {
 
   toggleCell = (e) => {
     const classArr = e.target.classList;
-    console.log(classArr);
     if (classArr.contains("dead")) {
       classArr.remove("dead");
       classArr.add("alive");
     }
   }
 
-  reset = () => {
 
-    this.setState({ generation: 0 })
+
+
+  reset = () => {
+    const board = this.createInitialBoard();
+    console.log(board);
+    this.setState({ generation: 0, boardArr: board })
   }
+
+  creatRandomBoard = () => {
+
+  }
+
+
+
+
+  createInitialBoard = () => {
+    let rowArr = [];
+    let cellStatus;
+
+    for (let i = 0; i < this.state.height; i++) {
+
+      // pass cell status value as props from 2nd dimension of arr
+
+      rowArr.push(<Row
+        width={this.state.width}
+        className="Row"
+        key={"row-" + i}
+        toggleCell={this.toggleCell}
+        />
+      );
+    }
+    return rowArr;
+  }
+
+
+
   generate = () => {
     const prevGen = this.state.boardArr;
     let newGen = prevGen;
@@ -51,7 +85,6 @@ class App extends Component {
     console.log(newGen);
 
     newGen.map((row, i) => {
-      console.log(row);
       // row.map((cell, i) => {
       //   if (cell.classList.contains("alive")) {
       //     console.log( "cell ", i, " is ALIVE")

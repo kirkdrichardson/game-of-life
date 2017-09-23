@@ -1,16 +1,16 @@
 import React from 'react';
-import Square from './Cell.js';
+import Cell from './Cell.js';
 
 
 const Row = (props) => {
   let rowArr = [];
 
-  for (let i = 0; i < 70; i++) {
+  for (let i = 0; i < props.width; i++) {
     rowArr.push(
-      <td className="Cell dead"
-      key={i}
-      onClick={props.toggleCell}></td>)
-    // rowArr.push(<Square key={"column-" + i} />);
+      <Cell
+        key={"cell-" + i}
+        toggleCell={props.toggleCell} />
+      );
   }
 
   return (
