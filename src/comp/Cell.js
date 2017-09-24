@@ -6,6 +6,7 @@ import React from 'react';
 
   return (
     <td
+      id={props.id}
       className={"Cell " + isAlive}
       onClick={props.toggleCell} >
       </td>
