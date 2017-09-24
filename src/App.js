@@ -8,11 +8,11 @@ import BoardControlBar from './comp/BoardControlBar.js'
 
 
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showModal: true,
       boardArr: [],  // 2D array of components aligned in columns & rows
       componentsArr: [],
       height: 40,
@@ -34,9 +34,9 @@ class App extends Component {
       this.setState({ boardArr: this.createRandomBoard() })
     }
 
-    if (this.state.running) {
-      this.generateId = setInterval(this.generate, 300);
-    }
+    // if (this.state.running) {
+    //   this.generateId = setInterval(this.generate, 300);
+    // }
 
   }
 
@@ -44,17 +44,6 @@ class App extends Component {
 
  // BUTTON FUNCTIONS
 
-  toggleDisplay = (value) => {
-    const width = value === 1 ? 50 : value === 2 ? 60 : 70;
-    const height = width === 50 ? 30 : width === 60 ? 40 : 50;
-    console.log(width, height)
-    this.toggleStart();
-    this.setState({
-      boardArr: [],
-      width: width,
-      height: height
-    }, this.toggleStart);
-  }
 
   toggleStart = () => {
     if (this.state.running) {
@@ -89,7 +78,28 @@ class App extends Component {
   }
 
 
+  toggleDisplay = (value) => {
+    const width = value === 1 ? 50 : value === 2 ? 60 : 70;
+    const height = width === 50 ? 30 : width === 60 ? 40 : 50;
+
+     // pause board before refitting
+    if (this.state.running) {
+      this.toggleStart();
+    }
+     // clear the board, and allow new generation at specified height & width
+    this.setState({
+      boardArr: [],
+      width: width,
+      height: height,
+      generation: 0
+    }, this.toggleStart);
+  }
+
+
+
+
 // BOARD FUNCTIONS
+
 
   // on click, switches to cell to opposite state by toggling class
   toggleCell = (e) => {
@@ -209,6 +219,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
+       <InfoModal
+       showModal={this.state.showModal}
+       closeModal={() => this.setState({showModal: false})}
+       generate={() =>  this.generateId = setInterval(this.generate, 300)}/>
 
       <h3>Generation: <span style={{color: "red"}}>{this.state.generation}</span></h3>
 

@@ -13,15 +13,15 @@ const DisplayBar = (props) => {
       onChange={props.toggleDisplay}
       justified>
 
-      <ToggleButton value={1} className="btn">
+      <ToggleButton value={1} bsStyle="primary">
         50x30
       </ToggleButton>
 
-      <ToggleButton value={2} className="btn">
+      <ToggleButton value={2} bsStyle="primary">
         60x40
       </ToggleButton>
 
-      <ToggleButton value={3} className="btn">
+      <ToggleButton value={3} bsStyle="primary">
         70x50
       </ToggleButton>
 
