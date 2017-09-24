@@ -5,7 +5,6 @@ $tableBorder: #112B0F;
 $cellBorder: #292929;
 $headerColor: white;
 
-/* #292929 cell border */
 
 $titleFont: 'Raleway', sans-serif;
 $bodyFont: 'Roboto Slab', serif;
@@ -16,8 +15,6 @@ html, body {
   height: 100%;
   width: 100%;
 }
-
-
 
 
 .App {
@@ -34,9 +31,6 @@ html, body {
     color: $headerColor;
     font-family: $titleFont;
   }
-
-
-
 
   .container {
     display: flex;
@@ -101,12 +95,7 @@ html, body {
       background-color: $tableBorder;
       border-color: #36842F;
     }
-
-
-
   }
-
-
 }
 
 
@@ -121,6 +110,11 @@ html, body {
   @extend .InfoModal;
   text-align: center;
   font-family: $titleFont;
+
+  span {
+    color: white;
+
+  }
 }
 
 .modalBod {

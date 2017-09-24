@@ -29,22 +29,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-
+      // loads a random configuration by default
     if (this.state.generation === 0) {
       this.setState({ boardArr: this.createRandomBoard() })
     }
-
-    // if (this.state.running) {
-    //   this.generateId = setInterval(this.generate, 300);
-    // }
-
   }
 
 
 
  // BUTTON FUNCTIONS
 
-
+  // pauses or starts the generate Fx
   toggleStart = () => {
     if (this.state.running) {
       clearInterval(this.generateId);
@@ -57,14 +52,14 @@ class App extends Component {
 
 
 
-
+  // clears & restarts w/ a new random configuration
   reset = () => {
     const board = this.createRandomBoard();
     this.setState({ generation: 0, boardArr: board })
   }
 
 
-
+  // removes all active cells
   clear = () => {
     let board = [];
     for (let row = 0; row < this.state.height; row++) {
@@ -78,6 +73,7 @@ class App extends Component {
   }
 
 
+  // assigns new dimensions to grid on click of a display button
   toggleDisplay = (value) => {
     const width = value === 1 ? 50 : value === 2 ? 60 : 70;
     const height = width === 50 ? 30 : width === 60 ? 40 : 50;
