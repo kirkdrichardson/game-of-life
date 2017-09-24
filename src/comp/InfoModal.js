@@ -45,7 +45,7 @@ class InfoModal extends Component {
         <Modal.Footer className="modalFoot">
         <Button bsStyle="success" type="submit" onClick={this.props.closeModal}>
           <i style={{color: "#222", fontSize: "16px", marginRight: "10px"}} className="glyphicon glyphicon-cog"></i>
-          Generate a Universe
+          Create a Universe
           </Button>
         </Modal.Footer>
       </Modal>
