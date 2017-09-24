@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Button } from 'react-bootstrap';
 
 
 const BoardControlBar = (props) => {
   return (
 
     <div className="controlBar">
-      <button onClick={props.toggleStart} className="btn">
+      <Button onClick={props.toggleStart} bsStyle="success">
         {!props.running ? "Start" : "Pause"}
-      </button>
+      </Button>
 
-      <button onClick={props.reset} className="btn">
+      <Button onClick={props.reset} bsStyle="success">
         Reset
-      </button>
+      </Button>
 
-      <button onClick={props.clear} className="btn">
+      <Button onClick={props.clear}  bsStyle="success">
         Clear
-      </button>
+      </Button>
     </div>
   );
 }
