@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css'
 import Cell from './comp/Cell.js';
 import Row from './comp/Row.js'
-import { Button, ButtonGroup } from 'react-bootstrap';
-import $ from 'jquery'
+import DisplayBar from './comp/DisplayBar.js'
+import InfoModal from './comp/InfoModal.js'
+import BoardControlBar from './comp/BoardControlBar.js'
 
 
 
@@ -14,8 +15,8 @@ class App extends Component {
     this.state = {
       boardArr: [],  // 2D array of components aligned in columns & rows
       componentsArr: [],
-      height: 30,
-      width: 50,
+      height: 40,
+      width: 60,
       running: true,
       generation: 0
     }
@@ -26,10 +27,6 @@ class App extends Component {
     // this.generate = this.generate.bind(this);
     // this.
   }
-
-
-
-
 
   componentDidMount() {
 
@@ -45,25 +42,26 @@ class App extends Component {
 
 
 
-  // on click, switches to cell to opposite state by toggling class
-  toggleCell = (e) => {
-      // cell id is str of indices in form "row,cell"
-      const idx = e.target.id.split(',');
-      let board = this.state.boardArr;
-       // if cell was 0, cell == 1, else cell == 0
-      let cell = board[parseInt(idx[0])][parseInt([idx[1]])] ? 0 : 1;
-      board[parseInt(idx[0])][parseInt([idx[1]])] = cell;
-      this.setState({ boardArr: board });
+ // BUTTON FUNCTIONS
+
+  toggleDisplay = (value) => {
+    const width = value === 1 ? 50 : value === 2 ? 60 : 70;
+    const height = width === 50 ? 30 : width === 60 ? 40 : 50;
+    console.log(width, height)
+    this.toggleStart();
+    this.setState({
+      boardArr: [],
+      width: width,
+      height: height
+    }, this.toggleStart);
   }
-
-
 
   toggleStart = () => {
     if (this.state.running) {
       clearInterval(this.generateId);
     }
     else {
-      this.generateId = setInterval(this.generate, 500);
+      this.generateId = setInterval(this.generate, 300);
     }
     this.setState({ running: !this.state.running });
   }
@@ -91,6 +89,20 @@ class App extends Component {
   }
 
 
+// BOARD FUNCTIONS
+
+  // on click, switches to cell to opposite state by toggling class
+  toggleCell = (e) => {
+      // cell id is str of indices in form "row,cell"
+      const idx = e.target.id.split(',');
+      let board = this.state.boardArr;
+       // if cell was 0, cell == 1, else cell == 0
+      let cell = board[ parseInt(idx[0], 10) ][ parseInt(idx[1], 10) ] ? 0 : 1;
+      board[ parseInt(idx[0], 10) ][ parseInt(idx[1], 10) ] = cell;
+      this.setState({ boardArr: board });
+  }
+
+
   // generates a random board state to be mapped through
   createRandomBoard = () => {
     let board = [];
@@ -104,6 +116,9 @@ class App extends Component {
     return board;
   }
 
+
+
+// boardArr FUNCTIONS
 
 
     // arguments: the current board (arr), and the indices of a row & cell (int)
@@ -197,10 +212,18 @@ class App extends Component {
 
       <h3>Generation: <span style={{color: "red"}}>{this.state.generation}</span></h3>
 
+
         <div className="container">
+          <BoardControlBar
+            toggleStart={this.toggleStart}
+            running={this.state.running}
+            reset={this.reset}
+            clear={this.clear}/>
+
+
+
           <table className="Board">
             <tbody>
-
             { /* generate components from 2D boardArr. if cell == 0, dead, else alive */ }
             { this.state.boardArr.map((row, rowIdx) => {
               let cellRow = [];
@@ -222,23 +245,15 @@ class App extends Component {
                   />
               );
             }) }
-
             </tbody>
             </table>
+
+            <DisplayBar
+              toggleDisplay={this.toggleDisplay}/>
+
         </div>
 
 
-        <button onClick={this.toggleStart} className="btn">
-          {!this.state.running ? "Start" : "Pause"}
-        </button>
-
-        <button onClick={this.reset} className="btn">
-          Reset
-        </button>
-
-        <button onClick={this.clear} className="btn">
-          Clear
-        </button>
 
       </div>
     );

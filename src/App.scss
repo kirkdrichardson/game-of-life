@@ -36,8 +36,22 @@ html, body {
 
   .container {
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
     margin-top: 50px;
+    border: solid 3px blue;
+
+  }
+
+  .controlBar {
+    width: 100%;
+  }
+
+  .btn {
+    width: 30%;
+    margin: 5px;
   }
 
 
@@ -75,9 +89,8 @@ html, body {
     background-color: transparent;
   }
 
-  .btn {
+  .DisplayBar {
     margin: 10px;
-    font-size: 1.2em;
   }
 
 }
