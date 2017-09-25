@@ -4,7 +4,6 @@ import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 const DisplayBar = (props) => {
   return (
-
     <ToggleButtonGroup
       type="radio"
       name="display"
@@ -26,7 +25,7 @@ const DisplayBar = (props) => {
       </ToggleButton>
 
     </ToggleButtonGroup>
-  )
+  );
 }
 
 export default DisplayBar
