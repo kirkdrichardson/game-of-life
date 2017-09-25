@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 
 const BoardControlBar = (props) => {
   return (
-
     <div className="controlBar">
       <Button onClick={props.toggleStart} bsStyle="success">
         {!props.running ? "Start" : "Pause"}

@@ -20,12 +20,6 @@ class App extends Component {
       running: true,
       generation: 0
     }
-
-    // this.toggleCell = this.toggleCell.bind(this);
-    // this.reset = this.reset.bind(this);
-    // this.createRandomBoard = this.reset.bind(this);
-    // this.generate = this.generate.bind(this);
-    // this.
   }
 
   componentDidMount() {
@@ -209,9 +203,6 @@ class App extends Component {
   }
 
 
-
-
-
   render() {
     return (
       <div className="App">
@@ -223,15 +214,12 @@ class App extends Component {
 
       <h3>Generation: <span style={{color: "red"}}>{this.state.generation}</span></h3>
 
-
         <div className="container">
           <BoardControlBar
             toggleStart={this.toggleStart}
             running={this.state.running}
             reset={this.reset}
             clear={this.clear}/>
-
-
 
           <table className="Board">
             <tbody>
@@ -258,14 +246,9 @@ class App extends Component {
             }) }
             </tbody>
             </table>
-
             <DisplayBar
               toggleDisplay={this.toggleDisplay}/>
-
         </div>
-
-
-
       </div>
     );
   }

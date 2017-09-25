@@ -7,7 +7,6 @@ class InfoModal extends Component {
     super(props);
   }
   render() {
-
     return (
       <Modal
         className="InfoModal"
@@ -50,7 +49,7 @@ class InfoModal extends Component {
         </Modal.Footer>
       </Modal>
   );
-}
+ }
 }
 
 
