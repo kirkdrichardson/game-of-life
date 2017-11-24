@@ -1,5 +1,7 @@
 # Life
 
+check out the [live version](https://kirkdrichardson.github.io/game-of-life/) @ gh-pages
+
 - An implementation of John Conway's Game of Life
 - Toggle cells to create initial states & observe their evolution over generations
 - Load a random state & modify as desired
