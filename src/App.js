@@ -212,7 +212,11 @@ class App extends Component {
        closeModal={() => this.setState({showModal: false})}
        generate={() =>  this.generateId = setInterval(this.generate, 300)}/>
 
-      <h3>Generation: <span style={{color: "red"}}>{this.state.generation}</span></h3>
+      <h3>
+        <span className="headerSpan"></span>
+        Generation:
+        <span className="headerSpan">{this.state.generation}</span>
+      </h3>
 
         <div className="container">
           <BoardControlBar
